@@ -22,6 +22,7 @@ resource "google_compute_network" "apigee_network" {
 resource "google_compute_global_address" "apigee_external_ip" {
   name = "apigee-${var.env_name}-ext-ip"
   project = var.project_id
+  depends_on = [ google_compute_network.apigee_network ]
 }
 
 resource "google_compute_global_address" "apigee_range" {
@@ -31,6 +32,7 @@ resource "google_compute_global_address" "apigee_range" {
   prefix_length = 16
   network       = google_compute_network.apigee_network.id
   project       = var.project_id
+  depends_on = [ google_compute_network.apigee_network ]
 }
 
 resource "google_service_networking_connection" "apigee_vpc_connection" {
@@ -49,6 +51,7 @@ resource "google_apigee_organization" "apigee_org" {
   depends_on         = [
     google_service_networking_connection.apigee_vpc_connection,
     google_project_service.apigee,
+    google_project_service.compute
   ]
 }
 
