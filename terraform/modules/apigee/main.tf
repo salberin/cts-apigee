@@ -1,11 +1,18 @@
 resource "google_project_service" "apigee" {
   project = var.project_id
   service = "apigee.googleapis.com"
+  depends_on = [ google_project_service.crm ]
 }
 
 resource "google_project_service" "compute" {
   project = var.project_id
   service = "compute.googleapis.com"
+  depends_on = [ google_project_service.crm ]
+}
+
+resource "google_project_service" "crm" {
+  project = var.project_id
+  service = "cloudresourcemanager.googleapis.com"
 }
 
 resource "google_project_service" "servicenetworking" {
