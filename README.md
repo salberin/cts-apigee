@@ -40,6 +40,17 @@ gcloud compute forwarding-rules create apigee-forwarding-rule  \
    --global --project=$PROJECT_ID
 ```
 
+## Deploy hello-world proxy
+
+```bash
+export MGMT_HOST="https://apigee.googleapis.com"
+curl -s -X POST \
+"$MGMT_HOST/v1/organizations/$PROJECT_ID/apis?action=import&name=hello-world" \
+  -H "$AUTH" --form file=@"./proxy/hello-world.zip"
+curl -s -X POST -H "$AUTH" \
+"$MGMT_HOST/v1/organizations/$PROJECT_ID/environments/$ENV_NAME-environment/apis/hello-world/revisions/1/deployments"
+```
+
 ## Prep machine
 
 ```bash
