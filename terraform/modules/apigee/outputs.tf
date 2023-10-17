@@ -9,3 +9,7 @@ output "hostname" {
 output "external_ip" {
   value = "${google_compute_global_address.apigee_external_ip.address}"
 }
+
+output "network" {
+  value = google_compute_network.apigee_network.id
+}

@@ -17,3 +17,8 @@ variable "external_ip" {
   description = "External IP address to use for the load balancer"
   type = string
 }
+
+variable "network" {
+  description = "network for the private service connect"
+  type = string
+}

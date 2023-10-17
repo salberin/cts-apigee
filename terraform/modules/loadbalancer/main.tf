@@ -1,3 +1,11 @@
+# resource "google_compute_network_endpoint_group" "neg" {
+#   provider = google-beta
+#   name                  = "${var.env_name}-neg"
+#   network               = var.network
+#   project               = var.project_id
+#   network_endpoint_type = "PRIVATE_SERVICE_CONNECT"
+# }
+
 resource "google_compute_backend_service" "apigee_backend" {
   name          = "apigee-${var.env_name}-backend"
   project = var.project_id

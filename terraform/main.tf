@@ -11,4 +11,5 @@ module "loadbalancer" {
   project_id = var.project_id
   env_name = var.env_name
   external_ip = module.apigee.external_ip
+  network = module.apigee.network
 }
