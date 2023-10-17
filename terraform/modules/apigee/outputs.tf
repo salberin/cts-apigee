@@ -1,5 +1,5 @@
 output "service_attachment" {
-  value = "${google_apigee_instance_attachment.apigee_ins_att.id}"
+  value = "${google_apigee_instance.apigee_ins.service_attachment}"
 }
 
 output "hostname" {
