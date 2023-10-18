@@ -22,3 +22,8 @@ variable "network" {
   description = "network for the private service connect"
   type = string
 }
+
+variable "service_attachment" {
+  description = "Service attachment URL for the private service connect"
+  type = string
+}

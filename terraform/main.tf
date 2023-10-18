@@ -12,4 +12,5 @@ module "loadbalancer" {
   env_name = var.env_name
   external_ip = module.apigee.external_ip
   network = module.apigee.network
+  service_attachment = module.apigee.service_attachment
 }

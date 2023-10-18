@@ -1,16 +1,24 @@
-# resource "google_compute_network_endpoint_group" "neg" {
-#   provider = google-beta
-#   name                  = "${var.env_name}-neg"
-#   network               = var.network
-#   project               = var.project_id
-#   network_endpoint_type = "PRIVATE_SERVICE_CONNECT"
-# }
+resource "google_compute_region_network_endpoint_group" "apigee_neg" {
+  name                  = "${var.env_name}-neg"
+  region                = var.region
+  project = var.project_id
+
+  network_endpoint_type = "PRIVATE_SERVICE_CONNECT"
+  psc_target_service    = var.service_attachment
+
+  network               = var.network
+}
+
 
 resource "google_compute_backend_service" "apigee_backend" {
   name          = "apigee-${var.env_name}-backend"
   project = var.project_id
   load_balancing_scheme = "EXTERNAL_MANAGED"
   protocol = "HTTPS"
+
+  backend {
+    group = google_compute_region_network_endpoint_group.apigee_neg.id
+  }
 }
 
 resource "google_compute_url_map" "apigee_url_map" {
